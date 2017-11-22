@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.hsy.spring.bean"/>
+    <import resource="spring-dao.xml"/>
+
+    <!--java中获取配置文件属性  配套使用 ConfigBean.java-->
+    <!--<bean id="config" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <array>
+                <value>classpath:/properties/config.properties</value>
+            </array>
+        </property>
+    </bean>-->
+
+    <bean id="propertyConfigurer" class="com.hsy.java.util.jdbc.PropertyConfig">
+        <property name="locations">
+            <list>
+                <value>classpath*:/properties/config.properties</value>
+            </list>
+        </property>
+        <!-- 是否加载插件。当为false或者没有配置configList都视为不加载插件读取配置-->
+        <property name="loadPlugin" value="true" />
+        <property name="configList">
+            <list>
+                <ref bean="jdbcConfigHelper"/>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="fileEncoding" value="utf-8"/>
+    </bean>
+
+    <bean id="jdbcConfigHelper" class="com.hsy.java.util.jdbc.JdbcConfigHelper">
+        <!-- 排除的key，这些key自己加载 -->
+        <property name="excludeKeys">
+            <set>
+                <value>name</value>
+                <value>age</value>
+            </set>
+        </property>
+    </bean>
+</beans>

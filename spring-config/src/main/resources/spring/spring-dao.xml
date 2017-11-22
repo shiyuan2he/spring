@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+">
+    <!--读取配置文件：方法一 -->
+    <!--
+        <context:property-placeholder
+        location="属性文件，多个之间逗号分隔"
+        file-encoding="文件编码"
+        ignore-resource-not-found="是否忽略找不到的属性文件"
+        ignore-unresolvable="是否忽略解析不到的属性，如果不忽略，找不到将抛出异常"
+        properties-ref="本地Properties配置"
+        local-override="是否本地覆盖模式，即如果true，那么properties-ref的属性将覆盖location加载的属性，否则相反"
+        system-properties-mode="系统属性模式，默认ENVIRONMENT（表示先找ENVIRONMENT，再找properties-ref/location的），NEVER：表示永远不用ENVIRONMENT的，OVERRIDE类似于ENVIRONMENT"
+        order="顺序"
+        />
+    -->
+    <context:property-placeholder location="classpath:/properties/jdbc.properties" file-encoding="utf-8" ignore-unresolvable="true"/>
+    <!--方法二：等价与方法一 -->
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:/properties/jdbc.properties</value>
+            </array>
+        </property>
+    </bean>-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${username}"/>
+        <property name="password" value="${password}"/>
+
+        <!-- c3p0 私有配置 -->
+        <property name="maxPoolSize" value="30"/>
+        <property name="minPoolSize" value="10"/>
+        <!-- 关闭连接不自动提交 -->
+        <property name="autoCommitOnClose" value="false"/>
+        <!--获取连接超时时间-->
+        <property name="checkoutTimeout" value="1000"/>
+        <!--当获取连接失败，重试次数-->
+        <property name="acquireIncrement" value="2"/>
+    </bean>
+</beans>

@@ -1,10 +1,7 @@
 package com.hsy.solr.common;
 
+import com.hsy.java.java.base.utils.MathHelper;
 import com.hsy.solr.bean.TheaterSolrBean;
-import com.hsy.javase.utils.MathHelper;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -23,8 +20,8 @@ public class BusinessUtils {
         //2.创建一文档对象
         TheaterSolrBean theaterSolrBean = new TheaterSolrBean();
         //3.向文档对象中添加域 （先定义后使用）
-        theaterSolrBean.setId(String.valueOf(MathHelper.generateRandomByLength(7)));
-        theaterSolrBean.setTheaterId(String.valueOf(MathHelper.generateRandomByLength(9)));
+        //theaterSolrBean.setId(String.valueOf(MathHelper.generateRandomByLength(7)));
+        //theaterSolrBean.setTheaterId(String.valueOf(MathHelper.generateRandomByLength(9)));
         theaterSolrBean.setTheaterName("中国戏剧黄金一代剧场典范话剧《冬之旅》");
         theaterSolrBean.setTheaterImg("images/theatre-place.jpg");
         List<String> listDesc = new ArrayList<>() ;
