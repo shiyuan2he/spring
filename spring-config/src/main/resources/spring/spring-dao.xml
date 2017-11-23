@@ -21,14 +21,7 @@
         />
     -->
     <context:property-placeholder location="classpath:/properties/jdbc.properties" file-encoding="utf-8" ignore-unresolvable="true"/>
-    <!--方法二：等价与方法一 -->
-    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <array>
-                <value>classpath:/properties/jdbc.properties</value>
-            </array>
-        </property>
-    </bean>-->
+
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${driver}"/>
         <property name="jdbcUrl" value="${url}"/>

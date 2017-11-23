@@ -1,5 +1,5 @@
 package com.hsy.spring.bean;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-@Component
+//@Component
 public class ConfigBean {
     //@Value("#{config.name}")
     private String name ;
@@ -38,7 +38,8 @@ public class ConfigBean {
         this.age = age;
     }
     //@PostConstruct
-    public void init(){
+    public void init() {
         System.out.println("ConfigBean======================"+name+age) ;
     }
+
 }
