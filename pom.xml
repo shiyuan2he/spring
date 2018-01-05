@@ -12,6 +12,7 @@
     <modules>
         <module>spring-solr</module>
         <module>spring-config</module>
+        <module>spring-slf4j-logback</module>
     </modules>
     <properties>
         <version.java>1.8</version.java>

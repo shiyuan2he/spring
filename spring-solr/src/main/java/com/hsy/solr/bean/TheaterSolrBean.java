@@ -2,7 +2,6 @@ package com.hsy.solr.bean;
 
 import org.apache.solr.client.solrj.beans.Field;
 
-import java.util.Date;
 import java.util.List;
 
 /**
