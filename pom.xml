@@ -13,6 +13,7 @@
         <module>spring-solr</module>
         <module>spring-config</module>
         <module>spring-slf4j-logback</module>
+        <module>spring-dynamic-datasource</module>
     </modules>
     <properties>
         <version.java>1.8</version.java>
@@ -23,6 +24,10 @@
         <version.junit>4.12</version.junit>
         <version.c3p0>0.9.1.2</version.c3p0>
         <version.mariadb>2.2.0</version.mariadb>
+        <version.logback>1.2.3</version.logback>
+        <version.slf4j>1.7.25</version.slf4j>
+        <version.driver.mysql>6.0.6</version.driver.mysql>
+        <version.druid>1.1.5</version.druid>
     </properties>
 
     <dependencyManagement>
@@ -90,6 +95,11 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
+            <dependency>
                 <groupId>c3p0</groupId>
                 <artifactId>c3p0</artifactId>
                 <version>${version.c3p0}</version>
@@ -98,6 +108,31 @@
                 <groupId>org.mariadb.jdbc</groupId>
                 <artifactId>mariadb-java-client</artifactId>
                 <version>${version.mariadb}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${version.driver.mysql}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${version.druid}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
