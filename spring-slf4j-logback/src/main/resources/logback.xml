@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration scan="true" scanPeriod="1 seconds" debug="true">
-    <property name="pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+    <timestamp key="byHour" datePattern="yyyyMMdd_HH"/>
+    <timestamp key="byMinute" datePattern="yyyyMMdd'T'HH:mm"/>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <property name="pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line] - %msg%n"/>
     <property name="charsetEncoding" value="UTF-8"/>
 
     <!--控制台日志-->
@@ -12,29 +18,54 @@
     </appender>
 
     <!--文件日志-->
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>myApp.log</file>
-
-        <encoder>
-            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <!--文件日志-->
-    <!--<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>D:\home\logs\solr\logFile.%d{yyyy-MM-dd}.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            &lt;!&ndash; daily rollover &ndash;&gt;
-            <fileNamePattern>D:\home\logs\solr\logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-            &lt;!&ndash; keep 30 days' worth of history capped at 3GB total size &ndash;&gt;
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>3GB</totalSizeCap>
-        </rollingPolicy>
-
+    <!--<appender name="file" class="ch.qos.logback.core.FileAppender">
+        相对于项目所在路径
+        <file>./logback/myApp-${byDay}.log</file>
+        true：每次都会覆盖之前的日志
+        <append>true</append>
         <encoder>
             <pattern>${pattern}</pattern>
         </encoder>
     </appender>-->
+
+    <!--滚动文件日志-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logback/mylog.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./logback/mylog.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+
+        <!--Sometimes you may wish to archive files essentially by date but at the same time limit the size of each log file-->
+        <!--
+        <file>./logback/mylog.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+        <!-- rollover daily -->
+        <!--<fileNamePattern>./logback/mylog-%d{yyyy-MM-dd_HH:mm}.%i.txt</fileNamePattern>-->
+        <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+        <!--<maxFileSize>100MB</maxFileSize>
+        <maxHistory>60</maxHistory>
+        <totalSizeCap>20GB</totalSizeCap>
+    </rollingPolicy>
+    -->
+
+        <!--
+        <file>./logback/test.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>tests.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>3</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>0.1KB</maxFileSize>
+        </triggeringPolicy>
+        -->
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
 
     <!--设置多个级别的日志-->
     <root level="debug">
