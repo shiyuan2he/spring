@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+
+">
+    <context:property-placeholder
+            file-encoding="utf-8"
+            ignore-unresolvable="true"
+            location="classpath*:properties/jdbc.properties" />
+
+    <import resource="classpath:/spring/applicationContext-datasource-mysql.xml" />
+    <import resource="classpath:/spring/applicationContext-datasource-oracle.xml" />
+
+    <bean id="dataSource" class="com.hsy.spring.dynamic.datasource.utils.ThreadLocalRountingDataSource">
+        <property name="defaultTargetDataSource" ref="dataSourceMysql" />
+        <property name="targetDataSources">
+            <map key-type="com.hsy.spring.dynamic.datasource.enums.DataSourcesEnum">
+                <entry key="MYSQL" value-ref="dataSourceMysql"/>
+                <entry key="ORACLE" value-ref="dataSourceOracle"/>
+                <!-- 这里还可以加多个dataSource -->
+            </map>
+        </property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath*:mapper/*Mapper.xml" />
+        <!--扫描entity包,使用别名,多个用;隔开-->
+        <property name="typeAliasesPackage" value="com.hsy.spring.dynamic.datasource.entity"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.hsy.spring.dynamic.datasource.dao" />
+    </bean>
+</beans>

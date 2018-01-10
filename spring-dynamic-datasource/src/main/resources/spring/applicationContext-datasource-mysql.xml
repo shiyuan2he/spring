@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+">
+
+    <!-- 配置数据源 -->
+    <bean name="dataSourceMysql" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init"
+          destroy-method="close">
+
+        <property name="url" value="${jdbc.mysql.url}" />
+        <property name="username" value="${jdbc.mysql.username}" />
+        <property name="password" value="${jdbc.mysql.password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}" />
+        <property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>
+    </bean>
+</beans>

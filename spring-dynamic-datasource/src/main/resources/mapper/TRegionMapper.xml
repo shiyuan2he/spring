@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsy.spring.dynamic.datasource.dao.TRegionMapper">
+
+    <select id="getAll" resultType="Region">
+        SELECT <include refid="listField"></include> FROM
+            (
+                SELECT A.*, ROWNUM RN
+                FROM (SELECT * FROM T_REGION) A
+                WHERE ROWNUM &lt;= #{limit}
+            )
+        WHERE RN &gt;= #{offset}
+    </select>
+
+    <sql id="listField">id,code,name,parent_Id</sql>
+</mapper>

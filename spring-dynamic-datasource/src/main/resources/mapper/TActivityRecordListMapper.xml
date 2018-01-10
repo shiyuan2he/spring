@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsy.spring.dynamic.datasource.dao.TActivityRecordListMapper">
+
+
+    <select id="getAll" resultType="ActivityRecordlist">
+        SELECT
+        <include refid="regionField"></include>
+        FROM t_activity_recordlist
+        WHERE 1=1
+        <if test="offset!=null and limit!=null">
+            LIMIT #{offset} ,#{limit}
+        </if>
+    </select>
+
+
+    <sql id="regionField">id,userId,awardid,award,createtime,telphone,periods</sql>
+</mapper>

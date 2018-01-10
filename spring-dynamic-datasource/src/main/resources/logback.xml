@@ -14,48 +14,10 @@
         </encoder>
     </appender>
 
-    <appender name="dailyRollingFileAppenderDebug" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${logHome}/debug.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${logHome}/debug.%d{yyyy-MM-dd_HH}.log</FileNamePattern>
-            <maxHistory>1</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <Pattern>${pattern}</Pattern>
-        </encoder>
-    </appender>
-    <appender name="dailyRollingFileAppenderInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${logHome}/info.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${logHome}/info.%d{yyyy-MM-dd_HH}.log</FileNamePattern>
-            <maxHistory>1</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <Pattern>${pattern}</Pattern>
-        </encoder>
-    </appender>
-    <appender name="dailyRollingFileAppenderError" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${logHome}/error.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${logHome}/error.%d{yyyy-MM-dd_HH}.log</FileNamePattern>
-            <maxHistory>1</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <Pattern>${pattern}</Pattern>
-        </encoder>
-    </appender>
-
     <logger name="org.springframework.web" level="debug"/>
 
     <root level="debug">
         <appender-ref ref="console"/>
-        <appender-ref ref="dailyRollingFileAppenderDebug"/>
     </root>
 
-    <root level="info">
-        <appender-ref ref="dailyRollingFileAppenderInfo"/>
-    </root>
-    <root level="error">
-        <appender-ref ref="dailyRollingFileAppenderError"/>
-    </root>
 </configuration>

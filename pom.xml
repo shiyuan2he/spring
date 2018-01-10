@@ -28,6 +28,8 @@
         <version.slf4j>1.7.25</version.slf4j>
         <version.driver.mysql>6.0.6</version.driver.mysql>
         <version.druid>1.1.5</version.druid>
+        <version.mybatis.spring>1.3.1</version.mybatis.spring>
+        <version.mybatis>3.4.5</version.mybatis>
     </properties>
 
     <dependencyManagement>
@@ -133,6 +135,16 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${version.druid}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${version.mybatis.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${version.mybatis}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
