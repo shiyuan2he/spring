@@ -13,12 +13,7 @@ import com.hsy.spring.dynamic.datasource.enums.DataSourcesEnum;
  * @price ¥5    微信：hewei1109
  */
 public class DataSourceTypeManager {
-    private static final ThreadLocal<DataSourcesEnum> dataSourceTypes = new ThreadLocal<DataSourcesEnum>(){
-        @Override
-        protected DataSourcesEnum initialValue(){
-            return DataSourcesEnum.MYSQL;
-        }
-    };
+    private static final ThreadLocal<DataSourcesEnum> dataSourceTypes = new ThreadLocal<>();
 
     public static DataSourcesEnum get(){
         return dataSourceTypes.get();
@@ -28,7 +23,7 @@ public class DataSourceTypeManager {
         dataSourceTypes.set(dataSourceType);
     }
 
-    public static void reset(){
-        dataSourceTypes.set(DataSourcesEnum.MYSQL);
+    public static void clear(){
+        dataSourceTypes.remove();
     }
 }

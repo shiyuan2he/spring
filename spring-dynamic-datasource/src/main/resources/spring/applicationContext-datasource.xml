@@ -20,7 +20,7 @@
     <import resource="classpath:/spring/applicationContext-datasource-oracle.xml" />
 
     <bean id="dataSource" class="com.hsy.spring.dynamic.datasource.utils.ThreadLocalRountingDataSource">
-        <property name="defaultTargetDataSource" ref="dataSourceMysql" />
+        <property name="defaultTargetDataSource" ref="dataSourceOracle" />
         <property name="targetDataSources">
             <map key-type="com.hsy.spring.dynamic.datasource.enums.DataSourcesEnum">
                 <entry key="MYSQL" value-ref="dataSourceMysql"/>

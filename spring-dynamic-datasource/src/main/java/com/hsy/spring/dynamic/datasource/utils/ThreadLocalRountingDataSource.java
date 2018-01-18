@@ -1,7 +1,9 @@
 package com.hsy.spring.dynamic.datasource.utils;
 
+import com.hsy.spring.dynamic.datasource.aop.DataSourceAspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-import org.springframework.lang.Nullable;
 
 /**
  * @author heshiyuan
@@ -14,9 +16,10 @@ import org.springframework.lang.Nullable;
  * @price ¥5    微信：hewei1109
  */
 public class ThreadLocalRountingDataSource extends AbstractRoutingDataSource {
-    @Nullable
+    private static Logger _logger = LoggerFactory.getLogger(DataSourceAspect.class) ;
     @Override
     protected Object determineCurrentLookupKey() {
+        _logger.info("当前数据源是({})", DataSourceTypeManager.get());
         return DataSourceTypeManager.get();
     }
 }

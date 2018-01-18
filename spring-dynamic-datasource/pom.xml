@@ -12,54 +12,53 @@
     <artifactId>spring-dynamic-datasource</artifactId>
     <packaging>war</packaging>
 
+    <properties>
+        <!---->
+        <jedis.version>2.9.0</jedis.version>
+        <spring.redis.version>1.8.3.RELEASE</spring.redis.version>
+        <pagehelper.version>5.0.4</pagehelper.version>
+        <!---->
+        <slf4j.version>1.7.25</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <spring.version>4.3.8.RELEASE</spring.version>
+        <junit.version>4.12</junit.version>
+        <druid.version>1.1.1</druid.version>
+        <fastjson.version>1.2.8</fastjson.version>
+        <mybatis.spring.version>1.3.0</mybatis.spring.version>
+        <mybatis.version>3.4.0</mybatis.version>
+        <mariadb.clent.version>2.0.3</mariadb.clent.version>
+        <servlert.api.version>3.1.0</servlert.api.version>
+        <jackson.version>2.8.8</jackson.version>
+        <quatz.version>2.3.0</quatz.version>
+        <jstl.version>1.2</jstl.version>
+    </properties>
     <dependencies>
-        <!--日志-->
+        <!-- 数据访问层 start-->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${spring.redis.version}</version>
         </dependency>
 
-        <!--dao-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.hynnet</groupId>
             <artifactId>oracle-driver-ojdbc6</artifactId>
-            <version>12.1.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-        </dependency>
+        <!-- end -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
+            <artifactId>spring-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-        </dependency>
-        <!--service-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency>
-
-        <!--web-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -70,21 +69,104 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>spring-test</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.8.10</version>
-        </dependency>
-        <!--test-->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>${mariadb.clent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlert.api.version}</version>
+        </dependency>
+        <!--<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quatz.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <!-- java编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

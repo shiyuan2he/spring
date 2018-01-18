@@ -9,7 +9,7 @@
     <bean name="dataSourceMysql" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init"
           destroy-method="close">
-
+        <property name="driverClassName" value="${jdbc.mysql.driver}"/>
         <property name="url" value="${jdbc.mysql.url}" />
         <property name="username" value="${jdbc.mysql.username}" />
         <property name="password" value="${jdbc.mysql.password}" />
