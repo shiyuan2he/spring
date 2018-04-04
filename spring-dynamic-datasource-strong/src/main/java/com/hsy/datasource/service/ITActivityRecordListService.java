@@ -1,10 +1,7 @@
-package com.hsy.spring.dynamic.datasource.service;
+package com.hsy.datasource.service;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.hsy.spring.dynamic.datasource.entity.ActivityRecordlist;
-
-import java.util.List;
-
+import com.hsy.datasource.entity.ActivityRecordlist;
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -17,5 +14,5 @@ import java.util.List;
  */
 public interface ITActivityRecordListService {
 
-    List<ActivityRecordlist> test(Integer offset, Integer limit) ;
+    PageList<ActivityRecordlist> test(Integer currentPage, Integer limit) ;
 }

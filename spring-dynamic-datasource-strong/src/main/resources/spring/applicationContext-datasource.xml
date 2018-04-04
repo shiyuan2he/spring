@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       ">
+    <context:property-placeholder
+            file-encoding="utf-8"
+            ignore-unresolvable="true"
+            location="classpath*:properties/jdbc.properties" />
+
+    <bean name="dataSourceOracle" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@192.168.6.65:1521:orcl" />
+        <property name="username" value="htmznew" />
+        <property name="password" value="htmznew" />
+
+        <!-- 初始化连接大小 -->
+        <!--<property name="initialSize" value="${jdbc.initialSize}" />-->
+        <!-- 连接池最大使用连接数量 -->
+        <!--<property name="maxActive" value="${jdbc.maxActive}" />-->
+        <!-- 连接池最小空闲 -->
+        <!--<property name="minIdle" value="${jdbc.minIdle}" />-->
+        <!-- 获取连接最大等待时间 -->
+        <!--<property name="maxWait" value="${jdbc.maxWait}" />
+        <property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>-->
+    </bean>
+
+    <!-- 配置数据源 -->
+    <bean name="dataSourceMysql" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.6.101:3306/htmall_product?useUnicode=true" />
+        <property name="username" value="root" />
+        <property name="password" value="htbuy@2016" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceOracle" />
+        <property name="configLocation" value="classpath:mybatis-config-oracle.xml" />
+        <property name="mapperLocations" value="classpath*:mapper/oracle/*Mapper.xml" />
+        <!--扫描entity包,使用别名,多个用;隔开-->
+        <property name="typeAliasesPackage" value="com.hsy.datasource.entity"/>
+    </bean>
+
+    <bean id="sqlSessionFactoryMysql" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceMysql" />
+        <property name="configLocation" value="classpath:mybatis-config-mysql.xml" />
+        <property name="mapperLocations" value="classpath*:mapper/mysql/*Mapper.xml" />
+        <!--扫描entity包,使用别名,多个用;隔开-->
+        <property name="typeAliasesPackage" value="com.hsy.datasource.entity"/>
+    </bean>
+
+    <bean id="oracleMapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.hsy.datasource.dao.oracle"/>
+    </bean>
+
+    <bean id="mysqlMapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryMysql"/>
+        <property name="basePackage" value="com.hsy.datasource.dao.mysql"/>
+    </bean>
+</beans>

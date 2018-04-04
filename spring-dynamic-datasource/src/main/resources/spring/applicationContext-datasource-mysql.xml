@@ -14,7 +14,7 @@
         <property name="username" value="${jdbc.mysql.username}" />
         <property name="password" value="${jdbc.mysql.password}" />
         <!-- 初始化连接大小 -->
-        <property name="initialSize" value="${jdbc.initialSize}" />
+        <!--<property name="initialSize" value="${jdbc.initialSize}" />-->
         <!-- 连接池最大使用连接数量 -->
         <property name="maxActive" value="${jdbc.maxActive}" />
         <!-- 连接池最小空闲 -->

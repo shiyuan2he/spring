@@ -1,11 +1,11 @@
-package com.hsy.spring.dynamic.datasource.dao;
-
+package com.hsy.datasource.dao.oracle;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.hsy.spring.dynamic.datasource.entity.ActivityRecordlist;
-import com.hsy.spring.dynamic.datasource.entity.Region;
+import com.hsy.datasource.entity.Region;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author heshiyuan
@@ -17,7 +17,7 @@ import java.util.List;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public interface TActivityRecordListMapper {
+public interface TRegionMapper {
 
-    PageList<ActivityRecordlist> getAll(@Param(value = "offset") Integer offset, @Param(value = "limit") Integer limit) ;
+    PageList<Region> getAll(PageBounds pageBounds, Map<String, Object> map) ;
 }

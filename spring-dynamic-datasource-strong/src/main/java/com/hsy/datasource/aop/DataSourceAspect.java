@@ -1,22 +1,19 @@
-package com.hsy.spring.dynamic.datasource.aop;
-
-import com.hsy.spring.dynamic.datasource.annotation.DynamicDataSourceAnnotation;
-import com.hsy.spring.dynamic.datasource.enums.DataSourcesEnum;
-import com.hsy.spring.dynamic.datasource.utils.DataSourceTypeManager;
-import com.hsy.spring.dynamic.datasource.utils.ThreadLocalRountingDataSource;
+package com.hsy.datasource.aop;
+import com.hsy.datasource.annotation.DynamicDataSourceAnnotation;
+import com.hsy.datasource.enums.DataSourcesEnum;
+import com.hsy.datasource.utils.DataSourceTypeManager;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-
-import javax.sql.DataSource;
 import java.lang.reflect.Method;
 
 /**
@@ -35,9 +32,7 @@ import java.lang.reflect.Method;
 public class DataSourceAspect {
     private static Logger _logger = LoggerFactory.getLogger(DataSourceAspect.class) ;
 
-    @Autowired private DataSource dataSource ;
-
-    @Before("@annotation(com.hsy.spring.dynamic.datasource.annotation.DynamicDataSourceAnnotation)") //前置通知
+    @Before("@annotation(com.hsy.datasource.annotation.DynamicDataSourceAnnotation)") //前置通知
     public void testBefore(JoinPoint point){
         //获得当前访问的class
         Class<?> className = point.getTarget().getClass();
@@ -68,7 +63,7 @@ public class DataSourceAspect {
         }
     }
 
-    @After("@annotation(com.hsy.spring.dynamic.datasource.annotation.DynamicDataSourceAnnotation)")   //后置通知
+    @After("@annotation(com.hsy.datasource.annotation.DynamicDataSourceAnnotation)")   //后置通知
     public void testAfter(JoinPoint point){
         //获得当前访问的class
         Class<?> className = point.getTarget().getClass();

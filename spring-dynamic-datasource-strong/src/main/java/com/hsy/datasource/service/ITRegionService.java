@@ -1,7 +1,7 @@
-package com.hsy.spring.dynamic.datasource.service;
+package com.hsy.datasource.service;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.hsy.spring.dynamic.datasource.entity.ActivityRecordlist;
+import com.hsy.datasource.entity.Region;
 
 import java.util.List;
 
@@ -15,7 +15,6 @@ import java.util.List;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public interface ITActivityRecordListService {
-
-    List<ActivityRecordlist> test(Integer offset, Integer limit) ;
+public interface ITRegionService {
+    PageList<Region> getAll(Integer offset, Integer limit) ;
 }

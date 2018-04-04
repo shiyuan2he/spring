@@ -1,5 +1,6 @@
 package com.hsy.spring.dynamic.datasource.service.impl;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hsy.spring.dynamic.datasource.annotation.DynamicDataSourceAnnotation;
 import com.hsy.spring.dynamic.datasource.dao.TActivityRecordListMapper;
 import com.hsy.spring.dynamic.datasource.dao.TRegionMapper;
@@ -25,6 +26,7 @@ import java.util.List;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @Service("activityRecordListService")
 @DynamicDataSourceAnnotation
 public class TActivityRecordListServiceImpl implements ITActivityRecordListService {
