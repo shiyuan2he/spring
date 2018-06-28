@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hsy.datasource.dao.mysql.TActivityRecordListMapper">
+
+    <resultMap id="activityRecordListMap" type="ActivityRecordlist">
+        <!-- 用户编号 -->
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <!-- 用户姓名 -->
+        <result column="userid" property="userId" jdbcType="VARCHAR"/>
+        <!-- 手机号码-->
+        <result column="awardid" property="awardid" jdbcType="VARCHAR"/>
+        <!-- 邮箱-->
+        <result column="award" property="award" jdbcType="VARCHAR"/>
+        <!-- 性别 -->
+        <result column="createtime" property="createtime" jdbcType="VARCHAR"/>
+        <!-- 身份证号  -->
+        <result column="telphone" property="telphone" jdbcType="VARCHAR"/>
+        <!-- 账户密码（非交易密码） -->
+        <result column="periods" property="periods" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getAll" parameterType="java.util.Map" resultMap="activityRecordListMap">
+        SELECT
+        <include refid="regionField"></include>
+        FROM t_activity_recordlist
+        WHERE 1=1
+    </select>
+
+
+    <sql id="regionField">id,userId,awardid,award,createtime,telphone,periods</sql>
+</mapper>

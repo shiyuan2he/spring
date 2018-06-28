@@ -1,8 +1,5 @@
-package com.hsy.spring.dynamic.datasource.utils;
+package com.hsy.datasource.utils;
 
-import com.hsy.spring.dynamic.datasource.aop.DataSourceAspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**

@@ -10,7 +10,7 @@
     </settings>
     <plugins>
         <plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
-            <property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.OracleDialect"/>
+            <property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect"/>
             <!-- 异步查询总数，异步查询，由于里面使用了线程池，所以在使用时就要加入清理监听器，以便在停止服务时关闭线程池。需要在web.xml中加入CleanupMybatisPaginatorListener -->
             <property name="asyncTotalCount" value="true"/>
         </plugin>

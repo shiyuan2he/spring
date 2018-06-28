@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,15 +6,14 @@
 ">
 
     <!-- 配置数据源 -->
-    <bean name="dataSourceMysql" class="com.alibaba.druid.pool.DruidDataSource"
-          init-method="init"
-          destroy-method="close">
+    <bean name="dataSourceMysql" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.mysql.driver}"/>
         <property name="url" value="${jdbc.mysql.url}" />
         <property name="username" value="${jdbc.mysql.username}" />
         <property name="password" value="${jdbc.mysql.password}" />
+
         <!-- 初始化连接大小 -->
-        <!--<property name="initialSize" value="${jdbc.initialSize}" />-->
+        <property name="initialSize" value="${jdbc.initialSize}" />
         <!-- 连接池最大使用连接数量 -->
         <property name="maxActive" value="${jdbc.maxActive}" />
         <!-- 连接池最小空闲 -->

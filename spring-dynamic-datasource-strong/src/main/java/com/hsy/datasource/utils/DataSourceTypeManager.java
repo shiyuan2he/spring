@@ -1,6 +1,6 @@
-package com.hsy.spring.dynamic.datasource.utils;
+package com.hsy.datasource.utils;
 
-import com.hsy.spring.dynamic.datasource.enums.DataSourcesEnum;
+import com.hsy.datasource.enums.DataSourcesEnum;
 
 /**
  * @author heshiyuan

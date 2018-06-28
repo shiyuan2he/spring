@@ -4,7 +4,6 @@
     <!-- 文件输出格式 -->
     <property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-40.40logger{39} : %m%n" />
     <property name="charsetEncoding" value="UTF-8" />
-    <property name="logHome" value="./logs/datasource" />
 
     <!--控制台日志-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -16,7 +15,7 @@
 
     <logger name="org.springframework.web" level="debug"/>
 
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="console"/>
     </root>
 

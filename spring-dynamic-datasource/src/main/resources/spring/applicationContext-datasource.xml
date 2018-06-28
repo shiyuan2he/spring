@@ -16,11 +16,11 @@
             ignore-unresolvable="true"
             location="classpath*:properties/jdbc.properties" />
 
-    <import resource="classpath:/spring/applicationContext-datasource-mysql.xml" />
     <import resource="classpath:/spring/applicationContext-datasource-oracle.xml" />
+    <import resource="classpath:/spring/applicationContext-datasource-mysql.xml" />
 
     <bean id="dataSource" class="com.hsy.spring.dynamic.datasource.utils.ThreadLocalRountingDataSource">
-        <property name="defaultTargetDataSource" ref="dataSourceMysql" />
+        <property name="defaultTargetDataSource" ref="dataSourceOracle" />
         <property name="targetDataSources">
             <map key-type="com.hsy.spring.dynamic.datasource.enums.DataSourcesEnum">
                 <entry key="MYSQL" value-ref="dataSourceMysql"/>
@@ -43,9 +43,9 @@
     </bean>
 
     <!-- 使用annotation定义事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hsy.spring.dynamic.datasource.dao" />
+        <property name="basePackage" value="com.hsy.spring.dynamic.datasource.dao"/>
     </bean>
 </beans>
