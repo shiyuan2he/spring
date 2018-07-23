@@ -15,11 +15,12 @@
         <module>spring-slf4j-logback</module>
         <module>spring-dynamic-datasource</module>
         <module>spring-dynamic-datasource-strong</module>
+        <module>spring-redis</module>
     </modules>
     <properties>
         <version.java>1.8</version.java>
         <version.encoding>utf-8</version.encoding>
-        <version.spring>5.0.1.RELEASE</version.spring>
+        <version.spring>5.0.7.RELEASE</version.spring>
         <version.hsy.java>1.0</version.hsy.java>
         <version.solrj>5.5.4</version.solrj>
         <version.junit>4.12</version.junit>
@@ -35,6 +36,8 @@
         <version.servletApi>3.1.0</version.servletApi>
         <version.jackson>2.9.5</version.jackson>
         <version.logback>1.2.3</version.logback>
+        <version.jedis>2.9.0</version.jedis>
+        <version.spring.redis>2.0.8.RELEASE</version.spring.redis>
     </properties>
 
     <dependencies>
@@ -46,12 +49,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${version.logback}</version>
+            <version>${version.slf4j}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -71,6 +69,18 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${version.jedis}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${version.spring.redis}</version>
+            </dependency>
             <dependency>
                 <groupId>com.hsy.java</groupId>
                 <artifactId>java-base</artifactId>
