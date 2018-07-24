@@ -10,10 +10,6 @@ public class RedisRepository extends AbstractSpringRedisCacheEnhance {
 
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    StringRedisTemplate stringRedisTemplate;
-
     @Override
     public RedisTemplate<String, Object> getRedisTemplate() {
         return redisTemplate;
