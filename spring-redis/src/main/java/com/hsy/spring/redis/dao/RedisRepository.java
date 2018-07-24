@@ -8,17 +8,14 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "redisRepository")
 public class RedisRepository extends AbstractSpringRedisCacheEnhance {
 
-    @Autowired RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @Override
     public RedisTemplate<String, Object> getRedisTemplate() {
         return redisTemplate;
-    }
-
-    @Override
-    public StringRedisTemplate getStringRedisTemplate() {
-        return stringRedisTemplate;
     }
 }

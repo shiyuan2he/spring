@@ -50,6 +50,5 @@
     <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory" />
     </bean>
-
     <!-- redis config end -->
 </beans>

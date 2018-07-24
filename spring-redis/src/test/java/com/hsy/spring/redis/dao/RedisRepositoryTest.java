@@ -18,7 +18,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-@RunWith(JUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @WebAppConfiguration("src/main/webapp")
 @ContextConfiguration({"classpath*:/spring/applicationContext.xml"})
 public class RedisRepositoryTest {
