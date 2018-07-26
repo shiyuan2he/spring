@@ -2,13 +2,9 @@ package com.hsy.spring.redis.dao;
 import com.hsy.java.util.cache.redis.impl.AbstractSpringStringRedisCacheEnhance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-
-//@Repository(value = "stringRedisRepository")
-@Component(value = "stringRedisRepository")
+@Repository(value = "stringRedisRepository")
 public class StringRedisRepository extends AbstractSpringStringRedisCacheEnhance {
 
     @Autowired StringRedisTemplate stringRedisTemplate;
@@ -16,5 +12,10 @@ public class StringRedisRepository extends AbstractSpringStringRedisCacheEnhance
     @Override
     public StringRedisTemplate getStringRedisTemplate() {
         return stringRedisTemplate;
+    }
+
+    @Override
+    public RedisTemplate<String, Object> getRedisTemplate() {
+        return null;
     }
 }
