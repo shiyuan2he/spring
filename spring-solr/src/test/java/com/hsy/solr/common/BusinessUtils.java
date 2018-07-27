@@ -1,6 +1,4 @@
 package com.hsy.solr.common;
-
-import com.hsy.java.java.base.utils.MathHelper;
 import com.hsy.solr.bean.TheaterSolrBean;
 import java.util.*;
 

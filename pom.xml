@@ -16,6 +16,8 @@
         <module>spring-dynamic-datasource</module>
         <module>spring-dynamic-datasource-strong</module>
         <module>spring-redis</module>
+        <module>spring-redis-sentinel</module>
+        <module>spring-redis-sentinel</module>
     </modules>
     <properties>
         <version.java>1.8</version.java>
@@ -56,19 +58,19 @@
             <artifactId>logback-classic</artifactId>
             <version>${version.logback}</version>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${version.servletApi}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${version.jackson}</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${version.servletApi}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
             <dependency>
                 <groupId>redis.clients</groupId>

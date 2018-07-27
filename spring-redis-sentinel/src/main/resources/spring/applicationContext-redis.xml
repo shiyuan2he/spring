@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+">
+    <context:property-placeholder location="classpath:config/redis.properties" ignore-resource-not-found="true"/>
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:properties/redis.properties</value>
+            </list>
+        </property>
+    </bean>-->
+
+    <!-- redis config start -->
+    <!-- 配置JedisPoolConfig实例 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.pool.maxTotal}"/>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="minIdle" value="${redis.pool.minIdle}"/>
+        <property name="testOnCreate" value="${redis.pool.testOnCreate}"/>
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+        <property name="testOnReturn" value="${redis.pool.testOnReturn}"/>
+        <property name="testWhileIdle" value="${redis.pool.testWhileIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.pool.timeBetweenEvictionRunsMillis}"/>
+        <property name="numTestsPerEvictionRun" value="${redis.pool.numTestsPerEvictionRun}"/>
+        <property name="minEvictableIdleTimeMillis" value="${redis.pool.minEvictableIdleTimeMillis}"/>
+    </bean>
+
+    <!-- 配置JedisConnectionFactory -->
+    <bean id="jedisConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="password" value="${redis.auth}"/>
+        <property name="database" value="${redis.dbIndex}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+        <property name="poolConfig" ref="poolConfig"/>
+    </bean>
+
+    <bean id="redisSentinelConfiguration" class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <property name="sentinels">
+            <set>
+                <bean name="sentinelNode1" class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.node1.host}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.node1.port}"/>
+                </bean>
+                <bean name="sentinelNode2" class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.node2.host}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.node2.port}"/>
+                </bean>
+                <bean name="sentinelNode3" class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.node3.host}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.node3.port}"/>
+                </bean>
+            </set>
+        </property>
+        <property name="master">
+            <bean name="masterNode" class="org.springframework.data.redis.connection.RedisNode">
+                <!--必须指定主节点名称-->
+                <property name="name" value="mymaster"/>
+                <constructor-arg name="host" value="${redis.host}"/>
+                <constructor-arg name="port" value="6379"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--哨兵配置方式二-->
+    <!--
+    <bean id="redisSentinelConfiguration" class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <constructor-arg name="propertySource" ref="propertySource"/>
+    </bean>
+
+    <bean name="propertySource" class="org.springframework.core.io.support.ResourcePropertySource">
+        <constructor-arg name="location" value="classpath:spring-redis-sentinel.properties" />
+    </bean>
+    -->
+
+
+    <!--
+     使用JDK提供的序列化功能。 优点是反序列化时不需要提供类型信息(class)，但缺点是序列化后的结果非常庞大，是JSON格式的5倍左右，这样就会消耗redis服务器的大量内存。
+    -->
+    <bean id="stringKeySerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    <!--
+        JdkSerializationRedisSerializer，这个序列化方法是Idk提供的，
+        要求要被序列化的类继承自Serializeable接口，然后通过Jdk对象序列化的方法保存，
+        这个序列化保存的对象，即使是个String类型的，在redis控制台，也是看不出来的，
+        因为它保存了一些对象的类型什么的额外信息。
+    -->
+    <bean id="jdkSerializationRedisSerializer"
+          class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+    <bean id="genericJackson2JsonRedisSerializer"
+          class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+    <!--
+    使用Jackson库将对象序列化为JSON字符串。优点是速度快，序列化后的字符串短小精悍。
+    但缺点也非常致命，那就是此类的构造函数中有一个类型参数，必须提供要序列化对象的类型信息(.class对象)。
+    通过查看源代码，发现其只在反序列化过程中用到了类型信息。
+    -->
+    <!--<bean id="jackson2JsonRedisSerializer" class="org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer">
+        <constructor-arg type="java.lang.Object" ></constructor-arg>
+    </bean>-->
+    <!-- 配置RedisTemplate -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <!-- 如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+        <property name="keySerializer" ref="stringKeySerializer"/>
+        <property name="hashKeySerializer" ref="stringKeySerializer"/>
+        <property name="valueSerializer" ref="genericJackson2JsonRedisSerializer"/>
+        <property name="hashValueSerializer" ref="genericJackson2JsonRedisSerializer"/>
+    </bean>
+    <!-- 配置StringRedisTemplate 下面的各种key都是stringKeySerializer序列化方式-->
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+    <!-- redis config end -->
+</beans>
