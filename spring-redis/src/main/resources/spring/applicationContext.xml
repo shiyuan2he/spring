@@ -9,6 +9,6 @@
 ">
 
     <!--包扫描-->
-    <context:component-scan base-package="com.hsy.spring.redis,com.hsy.java.util.cache.redis.impl"/>
+    <context:component-scan base-package="com.hsy.spring.redis"/>
     <import resource="classpath:spring/applicationContext-redis.xml" />
 </beans>

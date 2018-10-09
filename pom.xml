@@ -40,6 +40,7 @@
         <version.logback>1.2.3</version.logback>
         <version.jedis>2.9.0</version.jedis>
         <version.spring.redis>2.0.8.RELEASE</version.spring.redis>
+        <version.lombok>1.18.2</version.lombok>
     </properties>
 
     <dependencies>
@@ -47,6 +48,17 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${version.junit}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -203,6 +215,11 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${version.mybatis}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hsy.java</groupId>
+                <artifactId>java-cache-redis</artifactId>
+                <version>${version.hsy.java}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

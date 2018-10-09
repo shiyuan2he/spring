@@ -1,5 +1,6 @@
-package com.hsy.spring.redis.dao;
+package com.hsy.spring.redis.dao.object;
 
+import com.hsy.spring.redis.dao.object.HashRedisRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -26,11 +27,10 @@ import java.util.concurrent.TimeUnit;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath*:/spring/applicationContext.xml"})
-public class RedisRepositoryTest {
+public class HashRedisRepositoryTest {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired private RedisRepository redisRepository;
-
+//    @Autowired private HashRedisRepository hashRedisRepository;
+/*
     public Map<String, Object> generateMap(){
         Map<String, Object> returnMap = new HashMap<>();
         returnMap.put("aa", "aa");
@@ -148,5 +148,5 @@ public class RedisRepositoryTest {
             redisRepository.hashPut("hash:list", String.valueOf(i), generateList());
             logger.info("{}", redisRepository.hashGet("hash:list", String.valueOf(i)));
         }
-    }
+    }*/
 }
