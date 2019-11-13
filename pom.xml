@@ -34,7 +34,7 @@
         <version.mybatis>3.4.5</version.mybatis>
         <version.junit>4.12</version.junit>
         <version.servletApi>3.1.0</version.servletApi>
-        <version.jackson>2.9.5</version.jackson>
+        <version.jackson>2.9.10.1</version.jackson>
         <version.logback>1.2.3</version.logback>
         <version.jedis>2.9.0</version.jedis>
         <version.spring.redis>2.0.8.RELEASE</version.spring.redis>
