@@ -29,7 +29,7 @@
         <mariadb.clent.version>2.0.3</mariadb.clent.version>
         <servlert.api.version>3.1.0</servlert.api.version>
         <jackson.version>2.8.8</jackson.version>
-        <quatz.version>2.3.0</quatz.version>
+        <quatz.version>2.3.2</quatz.version>
         <jstl.version>1.2</jstl.version>
     </properties>
     <dependencies>
