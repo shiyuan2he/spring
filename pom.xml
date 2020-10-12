@@ -23,7 +23,7 @@
         <version.spring>5.0.7.RELEASE</version.spring>
         <version.hsy.java>1.0</version.hsy.java>
         <version.solrj>5.5.4</version.solrj>
-        <version.junit>4.12</version.junit>
+        <version.junit>4.13.1</version.junit>
         <version.c3p0>0.9.1.2</version.c3p0>
         <version.mariadb>2.2.0</version.mariadb>
         <version.logback>1.2.3</version.logback>
