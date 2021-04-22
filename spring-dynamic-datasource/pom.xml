@@ -25,7 +25,7 @@
         <druid.version>1.1.1</druid.version>
         <fastjson.version>1.2.8</fastjson.version>
         <mybatis.spring.version>1.3.0</mybatis.spring.version>
-        <mybatis.version>3.4.0</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <mariadb.clent.version>2.0.3</mariadb.clent.version>
         <servlert.api.version>3.1.0</servlert.api.version>
         <jackson.version>2.8.8</jackson.version>
