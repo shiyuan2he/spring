@@ -20,7 +20,7 @@
     <properties>
         <version.java>1.8</version.java>
         <version.encoding>utf-8</version.encoding>
-        <version.spring>5.0.7.RELEASE</version.spring>
+        <version.spring>5.3.18</version.spring>
         <version.hsy.java>1.0</version.hsy.java>
         <version.solrj>5.5.4</version.solrj>
         <version.junit>4.12</version.junit>
